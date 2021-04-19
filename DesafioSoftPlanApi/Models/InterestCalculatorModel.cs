@@ -9,7 +9,7 @@ namespace DesafioSoftPlanApi.Models
     public class InterestCalculatorModel : IInterestCalculatorModel
     {
         private readonly decimal FEE_VALUE = 0.01M;
-        private readonly string PROJECT_REPOSITORY = "github.com.br";
+        private readonly string PROJECT_REPOSITORY = "https://github.com/bjsavino/DesafioSoftPlan";
 
         public decimal GetFeeValue()
         {
