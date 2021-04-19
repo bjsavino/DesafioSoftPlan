@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,13 @@ namespace DesafioSoftPlanApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SoftPlanChallenge API", Version = "v1" });
+            });
+
+
             services.AddSingleton(typeof(IInterestCalculatorModel), typeof(InterestCalculatorModel));
         }
 
@@ -44,6 +52,12 @@ namespace DesafioSoftPlanApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "SoftPlan Challenge API V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {
